@@ -26,6 +26,7 @@
     this.showSeconds = options.showSeconds;
     this.template = options.template;
     this.appendWidgetTo = options.appendWidgetTo;
+    this.appendToSibling = options.appendToSibling;
 
     this._init();
   };
