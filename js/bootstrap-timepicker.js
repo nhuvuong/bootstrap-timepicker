@@ -37,8 +37,8 @@
     _init: function() {
       var self = this;
 
-      if (this.$element.parent().hasClass('input-append') || this.$element.parent().hasClass('input-prepend')) {
-        this.$element.parent('.input-append, .input-prepend').find('.add-on').on({
+      if (this.$element.parent().hasClass('input-append') || this.$element.parent().hasClass('input-prepend') || this.$element.parent().hasClass('input-elem')) {
+        this.$element.parent('.input-append, .input-prepend, .input-elem').find('.add-on').on({
           'click.timepicker': $.proxy(this.showWidget, this)
         });
         this.$element.on({
@@ -65,7 +65,8 @@
       }
 
       if (this.template !== false) {
-        this.$widget = $(this.getTemplate()).prependTo(this.$element.parents(this.appendWidgetTo)).on('click', $.proxy(this.widgetClick, this));
+        var appendToElem = this.appendToSibling ? this.$element.siblings(this.appendWidgetTo) : this.$element.parents(this.appendWidgetTo);
+        this.$widget = $(this.getTemplate()).prependTo(appendToElem).on('click', $.proxy(this.widgetClick, this));
       } else {
         this.$widget = false;
       }
@@ -880,7 +881,8 @@
     showInputs: true,
     showMeridian: true,
     template: 'dropdown',
-    appendWidgetTo: '.bootstrap-timepicker'
+    appendWidgetTo: '.bootstrap-timepicker',
+    appendToSibling: false
   };
 
   $.fn.timepicker.Constructor = Timepicker;
